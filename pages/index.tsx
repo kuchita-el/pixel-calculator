@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import {TextField} from "@mui/material";
+import {Box, Container, TextField, Typography} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 
 const calculateFixedPixelCount: (nums: number[]) => number = nums => {
@@ -38,16 +38,17 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>ピクセル計算機</h1>
+      <Container maxWidth="sm">
+        <Box minHeight="100vh" display="flex" justifyContent="center" alignItems="center" flex="1" flexDirection="column">
+        <Typography variant='h3' component='h1' align='center'>ピクセル計算機</Typography>
+        <Typography component='p' align='center' margin="4rem 0">イラストロジックのピクセル数を計算します</Typography>
 
-        <p>
-          イラストロジックのピクセル数を計算します。
-        </p>
-
+        
         <TextField label="塗りつぶすピクセルの数" onChange={handleInput} error={error} helperText="スペース区切りの数列を入力してください。"></TextField>
         <p>ピクセル数:{result}</p>
-      </main>
+        </Box>
+
+      </Container>
     </div>
   )
 }
