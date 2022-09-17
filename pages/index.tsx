@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import {Box, Container, TextField, Typography} from "@mui/material";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, FC, useState} from "react";
 
 const calculateFixedPixelCount: (nums: number[]) => number = nums => {
   if (nums.length === 0) return 0
@@ -14,20 +14,22 @@ const Home: NextPage = () => {
   const [result, setResult] = useState("")
   const [error, setError] = useState(false)
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    if (value == null || !/^[0-9\s]+$/.test(value)) {
-      setResult("")
-      setError(true)
-      return
-    }
+  const validator = (value: string) => {
+    return /^[0-9\s]+$/.test(value);
+  }
+
+  const onError = () => {
+    setResult("")
+  }
+
+  const onChange = (value: string, error: boolean) => {
+    if (error) return;
     const list = value
-        .trim()
-        .split(" ")
-        .filter(e => e.length > 0)
-        .map(e => Number.parseInt(e));
+    .trim()
+    .split(" ")
+    .filter(e => e.length > 0)
+    .map(e => Number.parseInt(e));
     setResult(calculateFixedPixelCount(list) + "")
-    setError(false)
   }
 
   return (
@@ -44,7 +46,7 @@ const Home: NextPage = () => {
         <Typography component='p' align='center' margin="4rem 0">イラストロジックのピクセル数を計算します</Typography>
 
         
-        <TextField label="塗りつぶすピクセルの数" onChange={handleInput} error={error} helperText="スペース区切りの数列を入力してください。"></TextField>
+        <ReactiveTextField label='塗りつぶすピクセルの数' helperText='スペース区切りの数列を入力してください。' validator={validator} onChange={onChange} onError={onError}></ReactiveTextField>
         <p>ピクセル数:{result}</p>
         </Box>
 
@@ -54,3 +56,36 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+
+type Validator = (value: string) => boolean;
+type OnChange = (value: string, error: boolean) => void 
+type OnError = () => void
+
+type Props = {
+    label?: string;
+    helperText?: string;
+    validator?: Validator;
+    onChange?: OnChange;
+    onError?: OnError;
+}
+
+const ReactiveTextField: FC<Props> = ({label, helperText, validator, onChange, onError}) => {
+    const [error, setError] = useState(false)
+    
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const changedValue = event.target.value
+        const isError = validator === undefined ? false : !validator(changedValue);
+        setError(isError)
+        if (onError !== undefined && isError) {
+            onError();
+        }
+        if (onChange !== undefined) {
+          onChange(changedValue, isError)
+        }
+    }
+
+    return (
+        <TextField label={label} helperText={helperText} error={error} onChange={handleChange}></TextField>
+    )
+}
