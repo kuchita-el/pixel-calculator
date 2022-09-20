@@ -2,13 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import {Box, Container, TextField, Typography} from "@mui/material";
 import {ChangeEvent, FC, useState} from "react";
-
-const calculateFixedPixelCount: (nums: number[]) => number = nums => {
-  if (nums.length === 0) return 0
-  const filledCount = nums.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-  const gutterCount = nums.length - 1
-  return filledCount + gutterCount;
-}
+import {requiredPixelSize} from "../libs/index"
 
 const Home: NextPage = () => {
   const [result, setResult] = useState("")
@@ -29,7 +23,7 @@ const Home: NextPage = () => {
     .split(" ")
     .filter(e => e.length > 0)
     .map(e => Number.parseInt(e));
-    setResult(calculateFixedPixelCount(list) + "")
+    setResult(requiredPixelSize(list) + "")
   }
 
   return (
