@@ -2217,6 +2217,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:packages/app"
   dependencies:
+    core: "workspace:*"
     nuxt: "npm:^3.11.1"
     vite-plugin-vuetify: "npm:^2.0.3"
     vue: "npm:^3.4.21"
@@ -2814,6 +2815,12 @@ __metadata:
   checksum: 10c0/90a0e40abbddfd7618f8ccd63a74d88deea94e77d0e8dbbea059fa7ebebb8fbb4e2909667fe26f3a467073de1a542ebe6ae4c73a73745ac5833786759cd906c9
   languageName: node
   linkType: hard
+
+"core@workspace:*, core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "core@workspace:packages/core"
+  languageName: unknown
+  linkType: soft
 
 "crc-32@npm:^1.2.0":
   version: 1.2.2
@@ -5662,6 +5669,8 @@ __metadata:
 "pixel-calculator@workspace:.":
   version: 0.0.0-use.local
   resolution: "pixel-calculator@workspace:."
+  dependencies:
+    typescript: "npm:^5.4.3"
   languageName: unknown
   linkType: soft
 
@@ -7056,6 +7065,26 @@ __metadata:
   version: 3.13.1
   resolution: "type-fest@npm:3.13.1"
   checksum: 10c0/547d22186f73a8c04590b70dcf63baff390078c75ea8acd366bbd510fd0646e348bd1970e47ecf795b7cff0b41d26e9c475c1fedd6ef5c45c82075fbf916b629
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.4.3":
+  version: 5.4.3
+  resolution: "typescript@npm:5.4.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/22443a8760c3668e256c0b34b6b45c359ef6cecc10c42558806177a7d500ab1a7d7aac1f976d712e26989ddf6731d2fbdd3212b7c73290a45127c1c43ba2005a
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.4.3#optional!builtin<compat/typescript>":
+  version: 5.4.3
+  resolution: "typescript@patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/6e51f8b7e6ec55b897b9e56b67e864fe8f44e30f4a14357aad5dc0f7432db2f01efc0522df0b6c36d361c51f2dc3dcac5c832efd96a404cfabf884e915d38828
   languageName: node
   linkType: hard
 

@@ -1,0 +1,11 @@
+{
+  "name": "core",
+  "packageManager": "yarn@4.1.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dis/index.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  }
+}
