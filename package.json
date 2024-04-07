@@ -1,8 +1,5 @@
 {
   "name": "pixel-calculator",
-  "scripts": {
-    "generate": "pnpm --filter=core build && pnpm --filter=app generate"
-  },
   "devDependencies": {
     "typescript": "^5.4.3"
   }
