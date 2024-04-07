@@ -1,9 +1,8 @@
 {
   "name": "pixel-calculator",
-  "packageManager": "yarn@4.1.1",
-  "workspaces": [
-    "packages/*"
-  ],
+  "scripts": {
+    "generate": "pnpm --filter=core build && pnpm --filter=app generate"
+  },
   "devDependencies": {
     "typescript": "^5.4.3"
   }
