@@ -6,10 +6,11 @@ export default defineNuxtConfig({
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
+        // @ts-expect-error Vuetify 公式でも ts-expect-error を使用している。
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
+      "@nuxt/eslint"
   ],
   vite: {
     vue: {
