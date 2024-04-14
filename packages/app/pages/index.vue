@@ -39,7 +39,7 @@
               </v-row>
               <v-row>
                 <v-col>
-                  <v-text-field v-model="model" label="塗りつぶすピクセルの数" hint="スペース区切りの数列を入力してください。" :error="error" @update:model-value="onChange" ></v-text-field>
+                  <v-text-field v-model="model" label="塗りつぶすピクセルの数" hint="スペース区切りの数列を入力してください。" :error="error" @update:model-value="onChange" />
                 </v-col>
               </v-row>
             </v-card-text>
