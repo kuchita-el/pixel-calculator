@@ -4,6 +4,11 @@
     "generate": "pnpm --filter=core build && pnpm --filter=app generate"
   },
   "devDependencies": {
-    "typescript": "^5.4.3"
+    "@eslint/js": "^8.57.0",
+    "@stylistic/eslint-plugin": "^1.7.0",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.3",
+    "typescript-eslint": "^7.6.0"
   }
 }
