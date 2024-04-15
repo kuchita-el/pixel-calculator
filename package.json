@@ -2,7 +2,8 @@
   "name": "pixel-calculator",
   "scripts": {
     "generate": "pnpm --filter=core build && pnpm --filter=app generate",
-      "lint": "pnpm --filter=core --filter=app lint"
+    "lint": "pnpm --filter=core --filter=app lint",
+    "type-check": "pnpm --filter=core --filter=app type-chek"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
