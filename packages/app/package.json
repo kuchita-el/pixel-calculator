@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "nuxt typecheck",
-    "test": "vitest run",
+    "test": "pnpm --filter=@kuchita-el/pixel-calculator-core build && vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
