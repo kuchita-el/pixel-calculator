@@ -10,7 +10,8 @@ export default defineNuxtConfig({
                 config.plugins.push(vuetify({autoImport: true}))
             })
         },
-        "@nuxt/eslint"
+        "@nuxt/eslint",
+        "@nuxt/test-utils/module"
     ],
     vite: {
         vue: {
