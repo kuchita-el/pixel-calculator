@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "lint": "eslint .",
-    "lint:fix" : "eslint . --fix"
+    "lint:fix" : "eslint . --fix",
+    "type-check": "tsc"
   },
   "devDependencies": {
     "vite": "^5.2.0",
