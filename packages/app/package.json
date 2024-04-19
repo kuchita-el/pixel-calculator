@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "@kuchita-el/pixel-calculator-app",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,12 +11,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "nuxt typecheck",
-    "test": "vitest run",
+    "test": "pnpm --filter=@kuchita-el/pixel-calculator-core build && vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.3.6",
-    "core": "workspace:*",
+    "@kuchita-el/pixel-calculator-core": "workspace:*",
     "nuxt": "^3.11.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
