@@ -1,9 +1,9 @@
 {
-  "name": "pixel-calculator",
+  "name": "@kuchita-el/pixel-calculator",
   "scripts": {
-    "generate": "pnpm --filter=core build && pnpm --filter=app generate",
+    "generate": "pnpm --filter=@kuchita-el/pixel-calculator-core build && pnpm --filter=@kuchita-el/pixel-calculator-app generate",
     "lint": "pnpm -r lint",
-    "type-check": "pnpm -r type-chek",
+    "type-check": "pnpm -r type-check",
     "test": "pnpm -r test"
   },
   "devDependencies": {

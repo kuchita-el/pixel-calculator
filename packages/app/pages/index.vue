@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {compressedArrangement} from "core/dist";
+  import {compressedArrangement} from "@kuchita-el/pixel-calculator-core";
 
   const model = ref<string>("")
   const result = ref<string>("");
