@@ -15,8 +15,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.3.6",
     "@kuchita-el/pixel-calculator-core": "workspace:*",
+    "@nuxt/eslint": "^0.3.6",
     "nuxt": "^3.11.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
