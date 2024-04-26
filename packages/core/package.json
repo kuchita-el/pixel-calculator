@@ -5,20 +5,19 @@
   "main": "./dist/index.js",
   "files": [
     "./dist",
-    "./types",
     "./package.json"
   ],
-  "types": "./types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
   },
   "scripts": {
-    "dev": "concurrently --names \"tsc,vite\" \"tsc --watch\" \"vite build --watch\"",
-    "build": "tsc && vite build",
+    "dev": "concurrently --names \"tsc,vite\" \"tsc --watch --project ./tsconfig.build.json\" \"vite build --watch\"",
+    "build": "tsc --project ./tsconfig.build.json && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

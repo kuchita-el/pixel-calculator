@@ -1,25 +1,24 @@
-import * as tslint from "typescript-eslint";
+import * as tseslint from "typescript-eslint";
 import eslint from "@eslint/js";
-import stylistic from "@stylistic/eslint-plugin"
 
-export default tslint.config(
+export default tseslint.config(
+  {
+    ignores: ["**/dist/"]
+  },
   eslint.configs.recommended,
-  ...tslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
   {
     languageOptions: {
       parserOptions: {
-        project: true,
+        project: "./tsconfig.json",
         tsconfigRootDir: import.meta.dirname,
         sourceType: "module",
-
       }
     }
   },
   {
     files: ["**/*.js"],
-    extends: [tslint.configs.disableTypeChecked]
+    extends: [tseslint.configs.disableTypeChecked]
   },
-  {
-    plugins: { "@stylistic": stylistic }
-  }
 )
