@@ -2,7 +2,7 @@ export type Canvas = CanvasPixel[];
 
 type CanvasLine = CanvasPixel[]
 
-type CanvasPixel = {
+interface CanvasPixel {
     readonly x: number;
     readonly y: number;
     readonly state: PixelState;
@@ -34,5 +34,5 @@ export const horizontalLine = (canvas: Canvas, y: number): CanvasLine => {
  * @param x
  */
 export const verticalLine = (canvas: Canvas, x: number): CanvasLine => {
-    return canvas.filter(value =>  value.x === x);
+    return canvas.filter(value => value.x === x);
 }

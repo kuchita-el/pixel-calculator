@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -11,12 +10,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "nuxt typecheck",
-    "test": "pnpm --filter=@kuchita-el/pixel-calculator-core build && vitest run",
+    "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.3.6",
     "@kuchita-el/pixel-calculator-core": "workspace:*",
+    "@nuxt/eslint": "^0.3.6",
     "nuxt": "^3.11.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
