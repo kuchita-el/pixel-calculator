@@ -18,7 +18,6 @@
   "scripts": {
     "dev": "concurrently --names \"tsc,vite\" \"tsc --watch --project ./tsconfig.build.json\" \"vite build --watch\"",
     "build": "tsc --project ./tsconfig.build.json && vite build",
-    "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",

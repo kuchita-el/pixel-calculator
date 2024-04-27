@@ -1,10 +1,14 @@
 {
   "name": "@kuchita-el/pixel-calculator",
   "scripts": {
-    "generate": "pnpm --filter=@kuchita-el/pixel-calculator-core build && pnpm --filter=@kuchita-el/pixel-calculator-app generate",
+    "build": "pnpm build:core && pnpm build:app",
+    "build:core": "pnpm --filter=@kuchita-el/pixel-calculator-core build",
+    "build:app": "pnpm --filter=@kuchita-el/pixel-calculator-app generate",
     "lint": "pnpm -r lint",
-    "type-check": "pnpm -r type-check",
-    "test": "pnpm -r test"
+    "type-check:core": "pnpm --filter=@kuchita-el/pixel-calculator-core type-check",
+    "type-check:app": "pnpm --filter=@kuchita-el/pixel-calculator-app type-check",
+    "test:core": "pnpm --filter=@kuchita-el/pixel-calculator-core test",
+    "test:app": "pnpm --filter=@kuchita-el/pixel-calculator-app test"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
