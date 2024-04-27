@@ -38,17 +38,44 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
+            packages/core/dist
+          key: ${{ runner.os }}-core-build-${{ hashFiles('packages/core/dist') }}
+          restore-keys: |
+            ${{ runner.os }}-nuxt-build-
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
             packages/app/dist
             packages/app/.nuxt
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('packages/app/dist') }}
+          key: ${{ runner.os }}-app-build-${{ hashFiles('packages/app/dist') }}
           restore-keys: |
             ${{ runner.os }}-nuxt-build-
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Static HTML export with Nuxt
-        run: pnpm run generate
+      - name: Lint
+        run: pnpm lint
+
+      - name: "[core] type check"
+        run: pnpm type-check:core
+
+      - name: "[core] test"
+        run: pnpm test:core
+
+      - name: "[core] build"
+        run: pnpm build:core
+
+      - name: "[app] type check"
+        run: pnpm type-check:app
+
+      - name: "[app] test"
+        run: pnpm test:app
+
+      - name: "[app] build"
+        run: pnpm build:app
         env:
           NUXT_APP_BASE_URL: ${{ steps.configure-pages.outputs.base_path }}
 
