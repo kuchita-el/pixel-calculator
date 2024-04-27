@@ -3,15 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "generate": "pnpm lint && pnpm type-check && pnpm test && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "nuxt typecheck",
-    "test": "pnpm --filter=@kuchita-el/pixel-calculator-core build && vitest run",
+    "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
