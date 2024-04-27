@@ -50,22 +50,22 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: [core] type check
+      - name: "[core] type check"
         run: pnpm type-check:core
 
-      - name: [core] test
+      - name: "[core] test"
         run: pnpm test:core
 
-      - name: [core] build
+      - name: "[core] build"
         run: pnpm build:core
 
-      - name: [app] type check
+      - name: "[app] type check"
         run: pnpm type-check:app
 
-      - name: [app] test
+      - name: "[app] test"
         run: pnpm test:app
 
-      - name: [app] build
+      - name: "[app] build"
         run: pnpm build:app
         env:
           NUXT_APP_BASE_URL: ${{ steps.configure-pages.outputs.base_path }}
