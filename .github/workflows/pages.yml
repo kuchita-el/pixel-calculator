@@ -38,9 +38,18 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
+            packages/core/dist
+          key: ${{ runner.os }}-core-build-${{ hashFiles('packages/core/dist') }}
+          restore-keys: |
+            ${{ runner.os }}-nuxt-build-
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
             packages/app/dist
             packages/app/.nuxt
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('packages/app/dist') }}
+          key: ${{ runner.os }}-app-build-${{ hashFiles('packages/app/dist') }}
           restore-keys: |
             ${{ runner.os }}-nuxt-build-
 
