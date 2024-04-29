@@ -11,3 +11,5 @@ export const compressedArrangement = (indicatorValue: IndicatorValue): PixelStat
         return previousValue.length === 0 ? currentValue : [...previousValue, "empty", ...currentValue]
     }, [] as PixelState[])
 }
+
+export type {PixelState, IndicatorValue}
