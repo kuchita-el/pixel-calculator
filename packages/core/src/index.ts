@@ -1,6 +1,8 @@
 import {IndicatorValue} from "./indicator.ts";
 import {PixelState} from "./canvas.ts";
 
+export type {IndicatorValue, PixelState};
+
 /**
  * 塗るマス同士の間隔を1マスに仮定したときの塗り方を表す
  * @param indicatorValue - 塗るマスの数を表す数列
@@ -12,4 +14,3 @@ export const compressedArrangement = (indicatorValue: IndicatorValue): PixelStat
     }, [] as PixelState[])
 }
 
-export type {PixelState, IndicatorValue}
