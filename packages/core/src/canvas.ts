@@ -1,6 +1,6 @@
 export type Canvas = CanvasPixel[];
 
-type CanvasLine = CanvasPixel[]
+export type CanvasLine = PixelState[]
 
 interface CanvasPixel {
     readonly x: number;
@@ -48,7 +48,7 @@ export const createCanvas = (x: number, y: number): Canvas => {
  * @param y - 垂直方向のインデックス(0で始まる)
  */
 export const horizontalLine = (canvas: Canvas, y: number): CanvasLine => {
-    return canvas.filter(value => value.y === y);
+    return canvas.filter(value => value.y === y).map(value => value.state);
 }
 
 /**
@@ -57,5 +57,5 @@ export const horizontalLine = (canvas: Canvas, y: number): CanvasLine => {
  * @param x - 水平方向のインデックス(0で始まる)
  */
 export const verticalLine = (canvas: Canvas, x: number): CanvasLine => {
-    return canvas.filter(value => value.x === x);
+    return canvas.filter(value => value.x === x).map(value => value.state);
 }
