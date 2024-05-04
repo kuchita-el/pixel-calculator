@@ -47,7 +47,7 @@ export const createCanvas = (x: number, y: number): Canvas => {
  * @param length
  */
 export const createCanvasLine = (length: number): CanvasLine => {
-    return new Array<PixelState>(length).map(() => "TBD");
+    return new Array<PixelState>(length).fill("TBD");
 }
 
 /**
