@@ -43,6 +43,14 @@ export const createCanvas = (x: number, y: number): Canvas => {
 }
 
 /**
+ * Canvas のラインを作る
+ * @param length
+ */
+export const createCanvasLine = (length: number): CanvasLine => {
+    return new Array<PixelState>(length).map(() => "TBD");
+}
+
+/**
  * キャンバスから水平方向のラインを取得する
  * @param canvas - キャンバス
  * @param y - 垂直方向のインデックス(0で始まる)
