@@ -2,6 +2,7 @@ import {IndicatorValue} from "./indicator.ts";
 import {CanvasLine, PixelState} from "./canvas.ts";
 
 export type {IndicatorValue, PixelState};
+export {createCanvasLine} from "./canvas.ts"
 
 /**
  * 塗るマス同士の間隔を1マスに仮定したときの塗り方を表す
