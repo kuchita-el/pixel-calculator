@@ -1,5 +1,5 @@
 import {describe, test, expect} from "vitest";
-import {indicatorNumericSchema, indicatorStringSchema} from "~/composables/calculator-form.ts";
+import {indicatorNumericSchema, indicatorSchema, indicatorStringSchema} from "~/composables/calculator-form.ts";
 
 describe("indicatorStringSchema", () => {
   test("validate", () => {
@@ -27,4 +27,21 @@ describe("indicatorNumericSchema", () => {
     expect(indicatorNumericSchema.isValidSync([1]), "数列1").toBeTruthy();
     expect(indicatorNumericSchema.isValidSync([1., 2]), "数列2").toBeTruthy();
   })
+})
+
+describe("indicatorSchema", () => {
+  test("validate", () => {
+    expect(indicatorSchema.isValidSync(""), "空文字列").toBeFalsy();
+    expect(indicatorSchema.isValidSync("   "), "空白").toBeFalsy();
+    expect(indicatorSchema.isValidSync("1"), "数字のみ").toBeTruthy();
+    expect(indicatorSchema.isValidSync("at53"), "英数字混在").toBeFalsy();
+    expect(indicatorSchema.isValidSync("1 24"), "数字と空白1").toBeTruthy();
+    expect(indicatorSchema.isValidSync(" 1  196 "), "数字と空白2").toBeTruthy();
+  })
+  test("transform", () => {
+    expect(indicatorSchema.validateSync("1"), "数字のみ").toStrictEqual([1]);
+    expect(indicatorSchema.validateSync("1 24"), "数字と空白1").toStrictEqual([1, 24]);
+    expect(indicatorSchema.validateSync(" 1  196 "), "数字と空白2").toStrictEqual([1, 196]);
+  })
+
 })
