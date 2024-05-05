@@ -11,7 +11,8 @@ export default defineNuxtConfig({
             })
         },
         "@nuxt/eslint",
-        "@nuxt/test-utils/module"
+        "@nuxt/test-utils/module",
+        "@vee-validate/nuxt"
     ],
     vite: {
         vue: {
