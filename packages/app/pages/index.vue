@@ -1,39 +1,16 @@
 <script setup lang="ts">
 import {createCanvasLine, decideLineArrangement} from "@kuchita-el/pixel-calculator-core";
 
-  const canvasLength = ref<string>("0")
-  const indicator = ref<string>("0")
   const result = ref(createCanvasLine(0));
-  const canvasLengthError = ref<boolean>(false);
-  const indicatorError = ref<boolean>(false);
 
-  const onChangeIndicator = (value: string) => {
-    if (!/^[0-9\s]+$/.test(value)) {
-      indicatorError.value = true;
-      result.value = [];
-      return;
-    }
-    indicatorError.value = false;
-  }
-  const onChangeCanvasLength = (value: string) => {
-    if (!/^[0-9]+$/.test(value)) {
-      canvasLengthError.value = true;
-      result.value = [];
-      return;
-    }
-    canvasLengthError.value = false;
-  }
-  const calculate = () => {
-    if (canvasLengthError.value || indicatorError.value) {
-      return;
-    }
-    const indicatorValue = indicator.value
-        .trim()
-        .split(" ")
-        .map(e => Number.parseInt(e));
-    const length = Number.parseInt(canvasLength.value);
-    result.value = decideLineArrangement(createCanvasLine(length), [indicatorValue[0], ...indicatorValue.slice(1)])
-  }
+  const { defineField, handleSubmit } = useCalculatorForm();
+
+  const [canvasLengthValue, canvasLengthAttrs] = defineField("canvasLength", {props: state => ({ errorMessages: state.errors })})
+  const [indicatorValue, indicatorAttrs] = defineField("indicator", {props: state => ({ errorMessages: state.errors })})
+
+  const calculate = handleSubmit(values => {
+    result.value = decideLineArrangement(createCanvasLine(values.canvasLength), [values.indicator[0], ...values.indicator.slice(1)]);
+  })
 
 </script>
 
@@ -53,12 +30,12 @@ import {createCanvasLine, decideLineArrangement} from "@kuchita-el/pixel-calcula
               </v-row>
               <v-row>
                 <v-col>
-                  <v-text-field v-model="canvasLength" label="キャンバスの長さ" hint="数値を入力してください。" :error="canvasLengthError" @update:model-value="onChangeCanvasLength" />
+                  <v-text-field v-model="canvasLengthValue" label="キャンバスの長さ" hint="数値を入力してください。" v-bind="canvasLengthAttrs" />
                 </v-col>
               </v-row>
               <v-row>
                 <v-col>
-                  <v-text-field v-model="indicator" label="塗りつぶすピクセルの数" hint="スペース区切りの数列を入力してください。" :error="indicatorError" @update:model-value="onChangeIndicator" />
+                  <v-text-field v-model="indicatorValue" label="塗りつぶすピクセルの数" hint="スペース区切りの数列を入力してください。" v-bind="indicatorAttrs" />
                 </v-col>
               </v-row>
               <v-row>
