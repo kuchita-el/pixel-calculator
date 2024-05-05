@@ -1,5 +1,23 @@
 import {describe, test, expect} from "vitest";
-import {indicatorNumericSchema, indicatorSchema, indicatorStringSchema} from "~/composables/calculator-form.ts";
+import {
+  canvasLengthSchema,
+  indicatorNumericSchema,
+  indicatorSchema,
+  indicatorStringSchema
+} from "~/composables/calculator-form.ts";
+
+describe("canvasLength", () => {
+  test("validate", () => {
+    expect(canvasLengthSchema.isValidSync(""), "空文字列").toBeFalsy();
+    expect(canvasLengthSchema.isValidSync("   "), "空白").toBeFalsy();
+    expect(canvasLengthSchema.isValidSync("1"), "数字のみ").toBeTruthy();
+    expect(canvasLengthSchema.isValidSync("at53"), "英数字混在").toBeFalsy();
+  })
+  test("transform", () => {
+    expect(canvasLengthSchema.validateSync("1")).toBe(1);
+    expect(canvasLengthSchema.validateSync("24")).toBe(24);
+  })
+})
 
 describe("indicatorStringSchema", () => {
   test("validate", () => {
