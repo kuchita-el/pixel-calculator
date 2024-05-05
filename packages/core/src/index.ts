@@ -40,11 +40,16 @@ export const decideLineArrangement = (canvasLine: CanvasLine, indicator: Indicat
     if (playLength === 0){
         return compressedArrangement(indicator)
     }
-    const fromIndicator = indicator.map(item => {
-        // 2 2 -> _1__1_
-        return [...new Array<PixelState>(playLength).fill("TBD"), ...new Array<PixelState>(Math.max(0, item - playLength)).fill("filled"), ...new Array<PixelState>(playLength).fill("TBD")] as PixelState[];
-    }).reduce((previousValue, currentValue) => {
-        return previousValue.length === 0 ? currentValue as CanvasLine : [...previousValue, "TBD", ...currentValue] as CanvasLine;
+    const fromIndicator = indicator.reduce((previousValue, currentValue, currentIndex, array) => {
+        if (currentIndex > 0) {
+            previousValue.push("TBD")
+        }
+        previousValue.push(...new Array<PixelState>(playLength).fill("TBD"))
+        previousValue.push(...new Array<PixelState>(Math.max(0, currentValue - playLength)).fill("filled"))
+        if (currentIndex === array.length - 1) {
+            previousValue.push(...new Array<PixelState>(playLength).fill("TBD"))
+        }
+        return previousValue
     }, [] as CanvasLine)
 
     return canvasLine.map((value, index) => {
