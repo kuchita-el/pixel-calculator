@@ -66,15 +66,13 @@ import {createCanvasLine, decideLineArrangement} from "@kuchita-el/pixel-calcula
                   <v-btn color="primary" @click="calculate">計算する</v-btn>
                 </v-col>
               </v-row>
+              <v-row>
+                <v-col class="d-flex">
+                  <canvas-pixel v-for="(state, index) of result" :key="index" :state="state" style="width: 15px"/>
+                </v-col>
+              </v-row>
             </v-card-text>
           </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-row>
-            <canvas-pixel v-for="(state, index) of result" :key="index" :state="state" style="width: 15px"/>
-          </v-row>
         </v-col>
       </v-row>
     </v-container>
