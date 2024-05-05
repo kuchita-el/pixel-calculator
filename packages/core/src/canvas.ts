@@ -1,6 +1,6 @@
 export type Canvas = CanvasPixel[];
 
-type CanvasLine = CanvasPixel[]
+export type CanvasLine = PixelState[]
 
 interface CanvasPixel {
     readonly x: number;
@@ -8,31 +8,62 @@ interface CanvasPixel {
     readonly state: PixelState;
 }
 
-export type PixelState = "empty" | "filled" | "TBD"
+/**
+ * 塗らないマス
+ */
+type Empty = "empty"
+
+/**
+ * 塗るマス
+ */
+type Filled = "filled"
+
+/**
+ * 塗るか塗らないか未定のマス
+ */
+type TBD = "TBD"
+
+/**
+ * マスの状態
+ * @enum
+ */
+export type PixelState = Empty | Filled | TBD
 
 /**
  * 横 x マス、縦 y マスのキャンバスを作る
- * @param x
- * @param y
+ * @param x - 水平方向のマス数
+ * @param y - 垂直方向のマス数
  */
 export const createCanvas = (x: number, y: number): Canvas => {
-    return new Array(x).flatMap((_, xIndex) => new Array(y).map((_, yIndex) => ({x: xIndex, y: yIndex, state: "TBD"})));
+    return new Array(x).flatMap((_, xIndex) => new Array(y).map((_, yIndex) => ({
+        x: xIndex,
+        y: yIndex,
+        state: "TBD"
+    })));
+}
+
+/**
+ * Canvas のラインを作る
+ * @param length
+ */
+export const createCanvasLine = (length: number): CanvasLine => {
+    return new Array<PixelState>(length).fill("TBD");
 }
 
 /**
  * キャンバスから水平方向のラインを取得する
- * @param canvas
- * @param y
+ * @param canvas - キャンバス
+ * @param y - 垂直方向のインデックス(0で始まる)
  */
 export const horizontalLine = (canvas: Canvas, y: number): CanvasLine => {
-    return canvas.filter(value => value.y === y);
+    return canvas.filter(value => value.y === y).map(value => value.state);
 }
 
 /**
  * キャンバスから垂直方向のラインを取得する
- * @param canvas
- * @param x
+ * @param canvas - キャンバス
+ * @param x - 水平方向のインデックス(0で始まる)
  */
 export const verticalLine = (canvas: Canvas, x: number): CanvasLine => {
-    return canvas.filter(value => value.x === x);
+    return canvas.filter(value => value.x === x).map(value => value.state);
 }
