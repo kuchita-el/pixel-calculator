@@ -1,5 +1,5 @@
 import {describe, test, expect} from "vitest";
-import {indicatorStringSchema} from "~/composables/calculator-form.ts";
+import {indicatorNumericSchema, indicatorStringSchema} from "~/composables/calculator-form.ts";
 
 describe("indicatorStringSchema", () => {
   test("validate", () => {
@@ -16,4 +16,15 @@ describe("indicatorStringSchema", () => {
     expect(indicatorStringSchema.validateSync(" 1  196 ")).toBe("1 196");
   })
 
+})
+
+describe("indicatorNumericSchema", () => {
+  test("validate", () => {
+    expect(indicatorNumericSchema.isValidSync([]), "空配列").toBeFalsy();
+    expect(indicatorNumericSchema.isValidSync([undefined]), "undefined").toBeFalsy();
+    expect(indicatorNumericSchema.isValidSync([null]), "null").toBeFalsy();
+    expect(indicatorNumericSchema.isValidSync(['a']), "文字列").toBeFalsy();
+    expect(indicatorNumericSchema.isValidSync([1]), "数列1").toBeTruthy();
+    expect(indicatorNumericSchema.isValidSync([1., 2]), "数列2").toBeTruthy();
+  })
 })
