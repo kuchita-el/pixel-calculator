@@ -9,18 +9,27 @@ export const indicatorNumericSchema = array().required().min(1).of(number().requ
 
 export const indicatorSchema = mixed((value): value is number[] => Array.isArray(value) && value.every(e => Number.isInteger(e)))
     .transform((value, originalValue, schema) => {
+        console.log("transform")
         if (schema.isType(value)) {
             return value;
         }
-       return indicatorStringSchema.validateSync(value).split(" ").map(item => Number.parseInt(item));
+        if (Number.isInteger(value)) {
+            return [value];
+        }
+        if (indicatorStringSchema.isValidSync(value)) {
+            return indicatorStringSchema.validateSync(value).split(" ").map((item: string) => Number.parseInt(item));
+        }
+       return value;
     })
-    .test(value => {
+    .typeError("スペース区切りの数列を入力してください。")
+    .test((value, context) => {
         try {
-            indicatorNumericSchema.validateSync(value);
+            console.log("test indicatorNumericSchema")
+            indicatorNumericSchema.validateSync(value, { context: context });
             return true;
         } catch(e){
             if (e instanceof ValidationError) {
-                return e;
+                return e
             } else {
                 throw e;
             }
