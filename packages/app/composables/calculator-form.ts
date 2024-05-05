@@ -1,5 +1,5 @@
 
-import {array, mixed, number, string, ValidationError} from "yup";
+import {array, mixed, number, object, string, ValidationError} from "yup";
 
 export const canvasLengthSchema = number().required().integer().min(1);
 
@@ -26,3 +26,10 @@ export const indicatorSchema = mixed((value): value is number[] => Array.isArray
             }
         }
     })
+
+export const useCalculatorForm = () => useForm<{ canvasLength: number, indicator: number[] }>({
+    validationSchema: toTypedSchema(object({
+        canvasLength: canvasLengthSchema,
+        indicator: indicatorSchema
+    }))
+})
