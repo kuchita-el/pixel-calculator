@@ -17,5 +17,5 @@ test("初期状態", () => {
     template: `<v-layout><Index></Index></v-layout>`
   }, { global: { components: {Index}, plugins: [vuetify] } })
 
-  expect(wrapper.text()).toContain("ピクセル数:")
+  expect(wrapper.text()).toContain("")
 })

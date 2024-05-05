@@ -1,24 +1,38 @@
 <script setup lang="ts">
-  import {compressedArrangement} from "@kuchita-el/pixel-calculator-core";
+import {createCanvasLine, decideLineArrangement} from "@kuchita-el/pixel-calculator-core";
 
-  const model = ref<string>("")
-  const result = ref<string>("");
-  const error = ref<boolean>(false);
+  const canvasLength = ref<string>("0")
+  const indicator = ref<string>("0")
+  const result = ref(createCanvasLine(0));
+  const canvasLengthError = ref<boolean>(false);
+  const indicatorError = ref<boolean>(false);
 
-  const onChange = (value: string) => {
+  const onChangeIndicator = (value: string) => {
     if (!/^[0-9\s]+$/.test(value)) {
-      error.value = true;
-      result.value = "";
+      indicatorError.value = true;
+      result.value = [];
       return;
     }
-    error.value = false;
-    const list = value
+    indicatorError.value = false;
+  }
+  const onChangeCanvasLength = (value: string) => {
+    if (!/^[0-9]+$/.test(value)) {
+      canvasLengthError.value = true;
+      result.value = [];
+      return;
+    }
+    canvasLengthError.value = false;
+  }
+  const calculate = () => {
+    if (canvasLengthError.value || indicatorError.value) {
+      return;
+    }
+    const indicatorValue = indicator.value
         .trim()
         .split(" ")
-        .filter(e => e.length > 0)
         .map(e => Number.parseInt(e));
-
-    result.value = compressedArrangement([list[0], ...list.slice(1)]).length + "";
+    const length = Number.parseInt(canvasLength.value);
+    result.value = decideLineArrangement(createCanvasLine(length), [indicatorValue[0], ...indicatorValue.slice(1)])
   }
 
 </script>
@@ -39,16 +53,26 @@
               </v-row>
               <v-row>
                 <v-col>
-                  <v-text-field v-model="model" label="塗りつぶすピクセルの数" hint="スペース区切りの数列を入力してください。" :error="error" @update:model-value="onChange" />
+                  <v-text-field v-model="canvasLength" label="キャンバスの長さ" hint="数値を入力してください。" :error="canvasLengthError" @update:model-value="onChangeCanvasLength" />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field v-model="indicator" label="塗りつぶすピクセルの数" hint="スペース区切りの数列を入力してください。" :error="indicatorError" @update:model-value="onChangeIndicator" />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-btn color="primary" @click="calculate">計算する</v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col class="d-flex">
+                  <canvas-pixel v-for="(state, index) of result" :key="index" :state="state" style="width: 15px"/>
                 </v-col>
               </v-row>
             </v-card-text>
           </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <p>ピクセル数:{{result}}</p>
         </v-col>
       </v-row>
     </v-container>
