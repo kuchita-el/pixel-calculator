@@ -16,9 +16,13 @@
   "dependencies": {
     "@kuchita-el/pixel-calculator-core": "workspace:*",
     "@nuxt/eslint": "^0.3.6",
+    "@vee-validate/nuxt": "^4.12.6",
+    "@vee-validate/yup": "^4.12.6",
     "nuxt": "^3.11.1",
+    "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.12.1",
