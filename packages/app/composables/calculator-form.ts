@@ -1,6 +1,8 @@
 
 import {array, mixed, number, string, ValidationError} from "yup";
 
+export const canvasLengthSchema = number().required().integer().min(1);
+
 export const indicatorStringSchema = string().required().trim().transform((value: string) => value.replace(/\s+/g, " ")).matches(/^[0-9 ]+$/)
 
 export const indicatorNumericSchema = array().required().min(1).of(number().required().positive().integer())
@@ -24,4 +26,3 @@ export const indicatorSchema = mixed((value): value is number[] => Array.isArray
             }
         }
     })
-
