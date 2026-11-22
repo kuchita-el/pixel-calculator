@@ -9,7 +9,12 @@ import {createCanvasLine, decideLineArrangement} from "@kuchita-el/pixel-calcula
   const [indicatorValue, indicatorAttrs] = defineField("indicator", {props: state => ({ errorMessages: state.errors })})
 
   const calculate = handleSubmit(values => {
-    result.value = decideLineArrangement(createCanvasLine(values.canvasLength), [values.indicator[0], ...values.indicator.slice(1)]);
+    const [first, ...rest] = values.indicator;
+    // スキーマで1件以上を保証しているが、型の上では空配列を除けないため確かめる。
+    if (first === undefined) {
+      return;
+    }
+    result.value = decideLineArrangement(createCanvasLine(values.canvasLength), [first, ...rest]);
   })
 
 </script>

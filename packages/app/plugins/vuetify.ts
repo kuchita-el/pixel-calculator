@@ -6,9 +6,7 @@ export default defineNuxtPlugin((app) => {
     const vuetify = createVuetify({
         icons: {
             defaultSet: "mdi",
-            aliases: {
-              aliases
-            },
+            aliases,
             sets: {
                 mdi
             }
